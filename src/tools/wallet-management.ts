@@ -1,10 +1,6 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-  saveWallet,
-  removeWallet,
-  listWallets,
-} from "../utils/wallet-store.js";
+import { saveWallet, removeWallet, listWallets } from "../utils/wallet-store.js";
 
 export function registerWalletManagementTools(server: McpServer): void {
   server.tool(
@@ -14,9 +10,7 @@ export function registerWalletManagementTools(server: McpServer): void {
       name: z
         .string()
         .describe('A friendly name for this wallet (e.g., "my-main", "trading", "savings")'),
-      address: z
-        .string()
-        .describe("The 60-character Qubic address to save"),
+      address: z.string().describe("The 60-character Qubic address to save"),
     },
     async ({ name, address }) => {
       const result = saveWallet(name, address);
@@ -57,11 +51,7 @@ export function registerWalletManagementTools(server: McpServer): void {
         };
       }
 
-      const lines = [
-        `Saved Wallets (${String(wallets.length)})`,
-        `${"=".repeat(30)}`,
-        ``,
-      ];
+      const lines = [`Saved Wallets (${String(wallets.length)})`, `${"=".repeat(30)}`, ``];
 
       for (const w of wallets) {
         lines.push(`${w.name}`);

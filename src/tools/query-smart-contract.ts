@@ -18,10 +18,7 @@ function formatContractList(): string {
     .join("\n");
 }
 
-export function registerQuerySmartContractTool(
-  server: McpServer,
-  config: QubicMcpConfig,
-): void {
+export function registerQuerySmartContractTool(server: McpServer, config: QubicMcpConfig): void {
   server.tool(
     "query_smart_contract",
     `Query a Qubic smart contract (read-only). Returns the contract's response data as base64-encoded bytes.
@@ -36,11 +33,7 @@ This is a low-level query tool. Use inputType to specify which contract function
         .int()
         .min(1)
         .describe("Smart contract index (1=QX, 2=Quottery, 3=Random, 4=QUTIL, 5=MLM)"),
-      inputType: z
-        .number()
-        .int()
-        .min(0)
-        .describe("Function input type ID (contract-specific)"),
+      inputType: z.number().int().min(0).describe("Function input type ID (contract-specific)"),
       inputSize: z
         .number()
         .int()
@@ -53,7 +46,8 @@ This is a low-level query tool. Use inputType to specify which contract function
         .describe("Hex-encoded input data for the contract function (default: empty)"),
     },
     async ({ contractIndex, inputType, inputSize, requestedData }) => {
-      const contractName = KNOWN_CONTRACTS[contractIndex] ?? `Unknown Contract #${String(contractIndex)}`;
+      const contractName =
+        KNOWN_CONTRACTS[contractIndex] ?? `Unknown Contract #${String(contractIndex)}`;
 
       try {
         const body: Record<string, unknown> = {

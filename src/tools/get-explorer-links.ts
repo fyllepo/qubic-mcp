@@ -3,15 +3,15 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { resolveAddress } from "../utils/wallet-store.js";
 
 const EXPLORERS = [
-  { name: "Qubic Explorer (Official)", addressUrl: "https://explorer.qubic.org/network/address/", txUrl: "https://explorer.qubic.org/network/tx/" },
+  {
+    name: "Qubic Explorer (Official)",
+    addressUrl: "https://explorer.qubic.org/network/address/",
+    txUrl: "https://explorer.qubic.org/network/tx/",
+  },
 ] as const;
 
 function formatAddressLinks(address: string, label: string): string {
-  const lines = [
-    `Explorer Links for ${label}`,
-    `${"=".repeat(40)}`,
-    ``,
-  ];
+  const lines = [`Explorer Links for ${label}`, `${"=".repeat(40)}`, ``];
 
   for (const explorer of EXPLORERS) {
     lines.push(`${explorer.name}:`);
@@ -23,12 +23,7 @@ function formatAddressLinks(address: string, label: string): string {
 }
 
 function formatTxLinks(txId: string): string {
-  const lines = [
-    `Explorer Links for Transaction`,
-    `${"=".repeat(40)}`,
-    `TX: ${txId}`,
-    ``,
-  ];
+  const lines = [`Explorer Links for Transaction`, `${"=".repeat(40)}`, `TX: ${txId}`, ``];
 
   for (const explorer of EXPLORERS) {
     lines.push(`${explorer.name}:`);
@@ -47,11 +42,8 @@ export function registerExplorerLinksTool(server: McpServer): void {
       address: z
         .string()
         .optional()
-        .describe('Qubic address (60 uppercase letters) or saved wallet name'),
-      txId: z
-        .string()
-        .optional()
-        .describe("Transaction ID (60 lowercase letters)"),
+        .describe("Qubic address (60 uppercase letters) or saved wallet name"),
+      txId: z.string().optional().describe("Transaction ID (60 lowercase letters)"),
     },
     async ({ address, txId }) => {
       if (!address && !txId) {

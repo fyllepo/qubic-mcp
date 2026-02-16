@@ -79,21 +79,13 @@ function formatTransferHistory(address: string, data: TransferResponse): string 
 export function registerTransferHistoryTool(server: McpServer, config: QubicMcpConfig): void {
   server.tool(
     "get_transfer_history",
-    'Get the transfer history for a Qubic address or saved wallet within a tick range. Returns incoming and outgoing transfers with details. Use get_tick_info first to find the current tick number.',
+    "Get the transfer history for a Qubic address or saved wallet within a tick range. Returns incoming and outgoing transfers with details. Use get_tick_info first to find the current tick number.",
     {
       address: z
         .string()
         .describe('Qubic address (60 uppercase letters) or saved wallet name (e.g., "my-main")'),
-      startTick: z
-        .number()
-        .int()
-        .min(0)
-        .describe("Start tick number for the range"),
-      endTick: z
-        .number()
-        .int()
-        .min(0)
-        .describe("End tick number for the range"),
+      startTick: z.number().int().min(0).describe("Start tick number for the range"),
+      endTick: z.number().int().min(0).describe("End tick number for the range"),
       pageSize: z
         .number()
         .int()
@@ -101,12 +93,7 @@ export function registerTransferHistoryTool(server: McpServer, config: QubicMcpC
         .max(100)
         .default(25)
         .describe("Number of results per page (default: 25, max: 100)"),
-      page: z
-        .number()
-        .int()
-        .min(1)
-        .default(1)
-        .describe("Page number (default: 1)"),
+      page: z.number().int().min(1).default(1).describe("Page number (default: 1)"),
     },
     async ({ address, startTick, endTick, pageSize, page }) => {
       const resolved = resolveAddress(address);
@@ -135,14 +122,14 @@ export function registerTransferHistoryTool(server: McpServer, config: QubicMcpC
         const response = (await rpcGet(config, path)) as TransferResponse;
 
         return {
-          content: [{ type: "text" as const, text: formatTransferHistory(resolved.address, response) }],
+          content: [
+            { type: "text" as const, text: formatTransferHistory(resolved.address, response) },
+          ],
         };
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return {
-          content: [
-            { type: "text" as const, text: `Error fetching transfer history: ${message}` },
-          ],
+          content: [{ type: "text" as const, text: `Error fetching transfer history: ${message}` }],
           isError: true,
         };
       }

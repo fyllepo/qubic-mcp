@@ -47,7 +47,9 @@ export function getWalletByName(name: string): SavedWallet | undefined {
   return readStore().wallets.find((w) => w.name.toLowerCase() === normalized);
 }
 
-export function resolveAddress(input: string): { address: string; label: string } | { error: string } {
+export function resolveAddress(
+  input: string,
+): { address: string; label: string } | { error: string } {
   const trimmed = input.trim();
 
   // If it looks like a valid address, use it directly
@@ -66,10 +68,7 @@ export function resolveAddress(input: string): { address: string; label: string 
   };
 }
 
-export function saveWallet(
-  name: string,
-  address: string,
-): { success: true } | { error: string } {
+export function saveWallet(name: string, address: string): { success: true } | { error: string } {
   const trimmedName = name.trim();
   const trimmedAddress = address.trim().toUpperCase();
 

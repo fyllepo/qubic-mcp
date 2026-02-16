@@ -39,7 +39,12 @@ function formatTx(entry: TransactionEntry): string {
   ];
 
   if (tx.inputType > 0) {
-    lines.push(``, `Smart Contract Call:`, `  Input Type: ${String(tx.inputType)}`, `  Input Size: ${String(tx.inputSize)} bytes`);
+    lines.push(
+      ``,
+      `Smart Contract Call:`,
+      `  Input Type: ${String(tx.inputType)}`,
+      `  Input Size: ${String(tx.inputSize)} bytes`,
+    );
   }
 
   return lines.join("\n");
@@ -50,9 +55,7 @@ export function registerTransactionTool(server: McpServer, config: QubicMcpConfi
     "get_transaction",
     "Look up a Qubic transaction by its transaction ID. Returns source, destination, amount, tick, and execution status. Transaction IDs are 60 lowercase letters.",
     {
-      transactionId: z
-        .string()
-        .describe("The 60-character lowercase transaction ID"),
+      transactionId: z.string().describe("The 60-character lowercase transaction ID"),
     },
     async ({ transactionId }) => {
       const sanitized = transactionId.trim().toLowerCase();

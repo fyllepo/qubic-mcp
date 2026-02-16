@@ -49,12 +49,7 @@ export function registerRichListTool(server: McpServer, config: QubicMcpConfig):
     "get_rich_list",
     "Get the Qubic rich list — top addresses ranked by balance for the current epoch. Supports pagination.",
     {
-      page: z
-        .number()
-        .int()
-        .min(1)
-        .default(1)
-        .describe("Page number (default: 1)"),
+      page: z.number().int().min(1).default(1).describe("Page number (default: 1)"),
       pageSize: z
         .number()
         .int()

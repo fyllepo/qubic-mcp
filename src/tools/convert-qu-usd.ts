@@ -39,22 +39,17 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
     "convert_qu_usd",
     "Convert between QU (Qubic Units) and USD using the current live price. Specify either a QU amount to get USD value, or a USD amount to get the equivalent in QU.",
     {
-      qu: z
-        .number()
-        .min(0)
-        .optional()
-        .describe("Amount in QU to convert to USD"),
-      usd: z
-        .number()
-        .min(0)
-        .optional()
-        .describe("Amount in USD to convert to QU"),
+      qu: z.number().min(0).optional().describe("Amount in QU to convert to USD"),
+      usd: z.number().min(0).optional().describe("Amount in USD to convert to QU"),
     },
     async ({ qu, usd }) => {
       if (qu === undefined && usd === undefined) {
         return {
           content: [
-            { type: "text" as const, text: "Please provide either a QU amount or a USD amount to convert." },
+            {
+              type: "text" as const,
+              text: "Please provide either a QU amount or a USD amount to convert.",
+            },
           ],
           isError: true,
         };
@@ -64,7 +59,10 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
       if (price === undefined) {
         return {
           content: [
-            { type: "text" as const, text: "Unable to fetch current QUBIC price. Try again shortly." },
+            {
+              type: "text" as const,
+              text: "Unable to fetch current QUBIC price. Try again shortly.",
+            },
           ],
           isError: true,
         };
@@ -76,7 +74,9 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
         const usdValue = qu * price;
         lines.push(`QU → USD Conversion`);
         lines.push(`===================`);
-        lines.push(`${formatLargeNumber(qu)} QU = $${usdValue < 0.01 ? usdValue.toPrecision(4) : usdValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+        lines.push(
+          `${formatLargeNumber(qu)} QU = $${usdValue < 0.01 ? usdValue.toPrecision(4) : usdValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+        );
       }
 
       if (usd !== undefined) {
@@ -84,7 +84,9 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
         if (lines.length > 0) lines.push(``);
         lines.push(`USD → QU Conversion`);
         lines.push(`===================`);
-        lines.push(`$${usd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} = ${formatLargeNumber(quValue)} QU`);
+        lines.push(
+          `$${usd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} = ${formatLargeNumber(quValue)} QU`,
+        );
       }
 
       lines.push(``);

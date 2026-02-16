@@ -25,10 +25,14 @@ function formatValidation(address: string, balance: BalanceData | undefined): st
     const totalTx = balance.numberOfIncomingTransfers + balance.numberOfOutgoingTransfers;
     const hasActivity = totalTx > 0 || balance.balance !== "0";
 
-    lines.push(`On-chain: ${hasActivity ? "Active — has balance or transfer history" : "Empty — no balance or transfers found"}`);
+    lines.push(
+      `On-chain: ${hasActivity ? "Active — has balance or transfer history" : "Empty — no balance or transfers found"}`,
+    );
     lines.push(``);
     lines.push(`Balance:    ${formatQU(balance.balance)}`);
-    lines.push(`Transfers:  ${formatNumber(totalTx)} total (${formatNumber(balance.numberOfIncomingTransfers)} in, ${formatNumber(balance.numberOfOutgoingTransfers)} out)`);
+    lines.push(
+      `Transfers:  ${formatNumber(totalTx)} total (${formatNumber(balance.numberOfIncomingTransfers)} in, ${formatNumber(balance.numberOfOutgoingTransfers)} out)`,
+    );
   } else {
     lines.push(`On-chain: Unable to verify (API unavailable)`);
   }
@@ -41,9 +45,7 @@ export function registerValidateAddressTool(server: McpServer, config: QubicMcpC
     "validate_address",
     "Validate a Qubic address format and check if it exists on-chain with balance or transfer activity.",
     {
-      address: z
-        .string()
-        .describe("Qubic address to validate (should be 60 uppercase letters)"),
+      address: z.string().describe("Qubic address to validate (should be 60 uppercase letters)"),
     },
     async ({ address }) => {
       const trimmed = address.trim();

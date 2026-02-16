@@ -46,11 +46,7 @@ function formatMarketCap(value: number | string): string {
 }
 
 function formatPriceComparison(sources: PriceSources): string {
-  const lines = [
-    `QUBIC Price Comparison`,
-    `======================`,
-    ``,
-  ];
+  const lines = [`QUBIC Price Comparison`, `======================`, ``];
 
   // Price comparison table
   lines.push(`Prices:`);
@@ -58,7 +54,9 @@ function formatPriceComparison(sources: PriceSources): string {
   if (sources.coinGecko) {
     const cg = sources.coinGecko;
     const changeDir = cg.usd_24h_change >= 0 ? "+" : "";
-    lines.push(`  CoinGecko:      ${formatUsd(cg.usd)}  (${changeDir}${cg.usd_24h_change.toFixed(2)}% 24h)`);
+    lines.push(
+      `  CoinGecko:      ${formatUsd(cg.usd)}  (${changeDir}${cg.usd_24h_change.toFixed(2)}% 24h)`,
+    );
   }
 
   if (sources.qubicApi) {
@@ -91,11 +89,15 @@ function formatPriceComparison(sources: PriceSources): string {
     const qMc = Number(sources.qubicApi.marketCap);
     if (Math.abs(cgMc - qMc) / cgMc > 0.1) {
       lines.push(``);
-      lines.push(`Note: Market cap differs between sources due to different circulating supply calculations.`);
+      lines.push(
+        `Note: Market cap differs between sources due to different circulating supply calculations.`,
+      );
     }
   }
 
-  const sourceCount = [sources.coinGecko, sources.qubicApi, sources.cryptoCompare].filter(Boolean).length;
+  const sourceCount = [sources.coinGecko, sources.qubicApi, sources.cryptoCompare].filter(
+    Boolean,
+  ).length;
   lines.push(``);
   lines.push(`Sources: ${String(sourceCount)} of 3 responding`);
 

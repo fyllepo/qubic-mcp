@@ -52,9 +52,7 @@ export function registerNetworkStatusTool(server: McpServer, config: QubicMcpCon
 
         if (!stats) {
           return {
-            content: [
-              { type: "text" as const, text: "Unable to parse network status response." },
-            ],
+            content: [{ type: "text" as const, text: "Unable to parse network status response." }],
             isError: true,
           };
         }

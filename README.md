@@ -28,15 +28,9 @@ Query balances, inspect transactions, track wallets, monitor network status, and
 
 ## Quick Start
 
-### With Claude Desktop
+Works with any MCP-compatible AI client — Claude, ChatGPT, Copilot, Cursor, Windsurf, Gemini, JetBrains, and more.
 
-Add to your Claude Desktop config:
-
-| OS | Path |
-|----|------|
-| macOS | `~/Library/Application Support/Claude/claude_desktop_config.json` |
-| Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
-| Linux | `~/.config/Claude/claude_desktop_config.json` |
+Add this to your client's MCP config:
 
 ```json
 {
@@ -49,19 +43,22 @@ Add to your Claude Desktop config:
 }
 ```
 
-### With VS Code / Cursor / Windsurf
+<details>
+<summary>Where to find the config file</summary>
 
-Add to your MCP settings:
+| Client | Config location |
+|--------|----------------|
+| **Claude Desktop** (macOS) | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| **Claude Desktop** (Windows) | `%APPDATA%\Claude\claude_desktop_config.json` |
+| **Claude Desktop** (Linux) | `~/.config/Claude/claude_desktop_config.json` |
+| **Claude Code** | Run `claude mcp add qubic -- npx mcp-server-qubic` in your terminal |
+| **VS Code / Cursor / Windsurf** | `.vscode/mcp.json` or your editor's MCP settings |
+| **JetBrains IDEs** | Settings → Tools → AI Assistant → MCP Servers |
+| **ChatGPT Desktop** | Settings → MCP Servers → Add |
 
-```json
-{
-  "mcpServers": {
-    "qubic": {
-      "command": "npx",
-      "args": ["mcp-server-qubic"]
-    }
-  }
-}
+For other clients, check your app's MCP documentation — the config above is universal.
+
+</details>
 ```
 
 Then just ask in plain English — here are some examples to get you started:
