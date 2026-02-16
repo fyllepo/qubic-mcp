@@ -44,9 +44,11 @@ jobs:
           npm version ${{ inputs.version }} -m "release: v%s"
           echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
-      - name: Push tag
-        run: |
-          git push origin main --follow-tags
+      - name: Push commit
+        run: git push origin main
+
+      - name: Push tag separately to trigger CI publish
+        run: git push origin "v${{ steps.bump.outputs.version }}"
 
       - name: Create GitHub Release
         env:
