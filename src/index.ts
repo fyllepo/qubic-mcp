@@ -14,12 +14,16 @@ import { registerConvertQuUsdTool } from "./tools/convert-qu-usd.js";
 import { registerValidateAddressTool } from "./tools/validate-address.js";
 import { registerExplorerLinksTool } from "./tools/get-explorer-links.js";
 import { getConfig } from "./config/index.js";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json") as { version: string };
 
 const config = getConfig();
 
 const server = new McpServer({
   name: "qubic-mcp",
-  version: "0.1.0",
+  version,
 });
 
 // Core tools — all verified against live Qubic APIs
