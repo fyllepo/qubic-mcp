@@ -13,6 +13,7 @@ import { registerRichListTool } from "./tools/get-rich-list.js";
 import { registerConvertQuUsdTool } from "./tools/convert-qu-usd.js";
 import { registerValidateAddressTool } from "./tools/validate-address.js";
 import { registerExplorerLinksTool } from "./tools/get-explorer-links.js";
+import { registerMiningPhaseTool } from "./tools/get-mining-phase.js";
 import { getConfig } from "./config/index.js";
 import { createRequire } from "node:module";
 
@@ -33,6 +34,9 @@ registerNetworkStatusTool(server, config);
 registerTransactionTool(server, config);
 registerTokenPriceTool(server, config);
 registerTransferHistoryTool(server, config);
+
+// Mining & network phase
+registerMiningPhaseTool(server, config);
 
 // Market & analytics tools
 registerRichListTool(server, config);
