@@ -4,7 +4,7 @@
 
 Community input is welcome — suggest features, vote on priorities, or contribute directly.
 
-## Phase 1: Foundation (v0.1.x) — Done
+## Phase 1: Foundation (v0.1.x–v0.2.x) — Done
 
 Core read-only tools for querying the Qubic network.
 
@@ -19,6 +19,7 @@ Core read-only tools for querying the Qubic network.
 - [x] `convert_qu_usd` — QU/USD converter at live rates
 - [x] `validate_address` — Format check and on-chain verification
 - [x] `get_explorer_links` — Block explorer links
+- [x] `get_mining_phase` — Current MINING/IDLE phase and XMR marathon status
 - [x] `save_wallet` / `list_wallets` / `remove_wallet` — Local wallet management
 - [x] npm publish with provenance
 - [x] MCP Registry listing
@@ -57,7 +58,7 @@ Longer-term possibilities depending on ecosystem maturity.
 These depend on Qubic ecosystem development and community demand:
 
 - **Write operations** — Transaction creation/signing (would require careful security design and explicit user consent)
-- **Mining/UPoW statistics** — Currently no public JSON APIs from pools
+- **Mining/UPoW pool statistics** — Per-pool hashrates and worker stats (no standard pool API)
 - **Payment request links** — Qubic has no payment URI scheme yet
 - **SC Development Assistant** — Help write/audit Qubic C++ smart contracts
 - **Aigarth Integration** — Leverage Qubic's AI subsystem

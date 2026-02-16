@@ -28,6 +28,7 @@ Query balances, inspect transactions, track wallets, monitor network status, and
 - **QU/USD Converter** — Convert between QU and USD at live rates
 - **Address Validation** — Check format and on-chain activity
 - **Explorer Links** — Direct links to the official Qubic block explorer
+- **Mining Phase** — Current MINING/IDLE phase and XMR marathon status, calculated from tick data
 - **Secure by Design** — Never stores or transmits private keys or seeds
 
 ## Quick Start
@@ -95,10 +96,12 @@ View transfer history:
 - "How much is 1 billion QU worth in USD?"
 - "Convert $100 to QU"
 
-### Network & Explorer
+### Network & Mining
 
 - "What's the current tick?"
 - "Show me the network status"
+- "What mining phase are we in?"
+- "Is it an XMR marathon right now?"
 - "Who are the top Qubic holders?"
 - "Show rich list page 2"
 - "Get explorer links for my-main"
@@ -149,6 +152,7 @@ Configuration is via environment variables. See [`.env.example`](.env.example) f
 | `convert_qu_usd` | Convert between QU and USD using live price |
 | `validate_address` | Validate address format and check on-chain activity |
 | `get_explorer_links` | Get links to Qubic block explorers for an address or transaction |
+| `get_mining_phase` | Current MINING/IDLE phase, cycle progress, and XMR marathon status |
 | `save_wallet` | Save a Qubic address with a friendly name for quick access |
 | `list_wallets` | List all saved wallets |
 | `remove_wallet` | Remove a saved wallet |
