@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/qubic/docs/main/static/img/qubic-docs-logo-lightmode.svg" alt="Qubic" width="300">
+</p>
+
 # qubic-mcp
 
 > MCP server for the Qubic cryptocurrency — enabling AI assistants to interact with the Qubic network.
@@ -59,7 +63,6 @@ Add this to your client's MCP config:
 For other clients, check your app's MCP documentation — the config above is universal.
 
 </details>
-```
 
 Then just ask in plain English — here are some examples to get you started:
 
