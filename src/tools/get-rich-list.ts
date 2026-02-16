@@ -33,7 +33,8 @@ function formatRichList(data: RichListResponse, page: number, pageSize: number):
   ];
 
   for (let i = 0; i < data.richList.entities.length; i++) {
-    const entity = data.richList.entities[i]!;
+    const entity = data.richList.entities[i];
+    if (!entity) continue;
     const rank = startRank + i;
     lines.push(`#${String(rank).padStart(4)} | ${formatQU(entity.balance)}`);
     lines.push(`       ${entity.identity}`);

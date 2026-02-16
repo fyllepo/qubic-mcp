@@ -1,6 +1,5 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { isValidQubicAddress } from "../utils/validation.js";
 import { resolveAddress } from "../utils/wallet-store.js";
 
 const EXPLORERS = [
