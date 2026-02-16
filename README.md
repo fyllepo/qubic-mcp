@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/qubic/docs/main/static/img/qubic-docs-logo-lightmode.svg" alt="Qubic" width="300">
+  <img src="assets/qubic-logo.png" alt="Qubic" width="300">
 </p>
 
 # qubic-mcp
