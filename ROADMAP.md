@@ -1,81 +1,68 @@
 # Roadmap
 
-This roadmap outlines planned features and future direction for qubic-mcp. It's a living document — community input is welcome.
+> **This roadmap is not set in stone.** It will pivot as the Qubic ecosystem evolves. The goal of this project is to provide ease-of-life functionality for interacting with the Qubic network through AI assistants — it is **not** a wallet replacement. As Qubic matures and new APIs become available, we'll plug into them.
 
-## Phase 1: Foundation (v0.1.0) — Current
+Community input is welcome — suggest features, vote on priorities, or contribute directly.
+
+## Phase 1: Foundation (v0.1.x) — Done
 
 Core read-only tools for querying the Qubic network.
 
 - [x] Project setup and CI/CD
-- [ ] `get_balance` — Query address balances
-- [ ] `get_tick_info` — Current tick and epoch info
-- [ ] `get_network_status` — Network health overview
-- [ ] `get_transaction` — Transaction lookup
-- [ ] `get_token_price` — QUBIC price data
-- [ ] MCP Inspector compatibility
-- [ ] Comprehensive test suite
-- [ ] npm publish with provenance
+- [x] `get_balance` — Query address balances
+- [x] `get_tick_info` — Current tick and epoch info
+- [x] `get_network_status` — Network health overview
+- [x] `get_transaction` — Transaction lookup
+- [x] `get_token_price` — Multi-source price comparison (CoinGecko, Qubic API, CryptoCompare)
+- [x] `get_transfer_history` — Paginated transfer history
+- [x] `get_rich_list` — Top holders ranked by balance
+- [x] `convert_qu_usd` — QU/USD converter at live rates
+- [x] `validate_address` — Format check and on-chain verification
+- [x] `get_explorer_links` — Block explorer links
+- [x] `save_wallet` / `list_wallets` / `remove_wallet` — Local wallet management
+- [x] npm publish with provenance
+- [x] MCP Registry listing
+- [x] Automated release pipeline
 
-## Phase 2: Smart Contracts (v0.2.0)
+## Phase 2: Smart Contracts (when decoders are available)
 
-Read-only access to Qubic's on-chain smart contracts.
+Read-only access to Qubic's on-chain smart contracts. Currently blocked — SC queries return raw base64 blobs that require contract-specific decoders to interpret. We'll revisit this as the Qubic API evolves.
 
-- [ ] `query_smart_contract` — Generic SC state query
-- [ ] `get_qx_orderbook` — QX DEX orderbook data
-- [ ] `get_qx_trades` — Recent QX trade history
-- [ ] `get_qx_assets` — List assets on QX
-- [ ] `get_quottery_bets` — Quottery active bets
-- [ ] `get_quottery_results` — Quottery historical results
-- [ ] Smart contract ABI/schema documentation as MCP resources
+- [ ] QX DEX orderbook and trade history
+- [ ] QX asset listings
+- [ ] Quottery bet data
+- [ ] Smart contract state queries with human-readable output
 
-## Phase 3: Advanced Queries (v0.3.0)
+## Phase 3: Ecosystem & Analytics
 
-Historical data, analytics, and richer querying.
+Richer data and integrations as Qubic APIs expand.
 
-- [ ] `get_transaction_history` — Paginated tx history for an address
-- [ ] `get_epoch_info` — Epoch details and computor performance
-- [ ] `get_rich_list` — Top holders
-- [ ] `search_transactions` — Search/filter transactions
-- [ ] MCP Resources for Qubic documentation (so AI can reference docs)
-- [ ] MCP Prompts for common Qubic workflows
-
-## Phase 4: Write Operations (v0.4.0) — Careful
-
-Transaction creation and signing (opt-in, heavily guarded).
-
-- [ ] `create_transaction` — Build unsigned transaction
-- [ ] `sign_transaction` — Sign with user-provided seed (in-memory only)
-- [ ] `broadcast_transaction` — Submit signed tx to network
-- [ ] `send_qubic` — High-level send flow
-- [ ] `transfer_asset` — QX asset transfer
-- [ ] Confirmation prompts and safety checks for all write operations
-- [ ] Explicit user consent flow before any on-chain action
-
-## Phase 5: Ecosystem Integrations (v0.5.0+)
-
-Broader Qubic ecosystem support and advanced features.
-
+- [ ] Epoch details and computor performance
 - [ ] Multi-network support (mainnet/testnet toggle)
-- [ ] Computor monitoring tools
-- [ ] Mining/UPoW statistics
-- [ ] Integration with Qubic wallet formats (vault files)
+- [ ] MCP Resources for Qubic reference documentation
+- [ ] MCP Prompts for common workflows
+- [ ] Transaction search and filtering
+
+## Phase 4: Advanced Features
+
+Longer-term possibilities depending on ecosystem maturity.
+
 - [ ] Streamable HTTP transport for remote deployment
 - [ ] Docker container distribution
-- [ ] Qubic smart contract deployment assistance (C++ SC tooling)
+- [ ] Computor monitoring tools
+- [ ] Portfolio tracking across multiple addresses
 
-## Future Ideas
+## Ideas We're Watching
 
-These are longer-term possibilities depending on Qubic ecosystem evolution:
+These depend on Qubic ecosystem development and community demand:
 
+- **Write operations** — Transaction creation/signing (would require careful security design and explicit user consent)
+- **Mining/UPoW statistics** — Currently no public JSON APIs from pools
+- **Payment request links** — Qubic has no payment URI scheme yet
 - **SC Development Assistant** — Help write/audit Qubic C++ smart contracts
-- **Portfolio Tracker** — Multi-address portfolio overview
-- **Arbitrage Monitor** — Cross-DEX price comparison
-- **Governance Tools** — Computor voting and proposal tracking
-- **IPO Tracker** — Smart contract IPO monitoring
 - **Aigarth Integration** — Leverage Qubic's AI subsystem
-- **Oracle Data** — Query Qubic oracle data feeds
-- **Send-Many Batching** — Batch multiple transfers efficiently
+- **Oracle Data** — Query oracle data feeds when available
 
 ## Contributing to the Roadmap
 
-Have an idea? Open a [feature request issue](https://github.com/user/qubic-mcp/issues/new?template=feature_request.yml) or start a [discussion](https://github.com/user/qubic-mcp/discussions).
+Have an idea? Open a [feature request issue](https://github.com/fyllepo/qubic-mcp/issues/new?template=feature_request.yml) or start a [discussion](https://github.com/fyllepo/qubic-mcp/discussions).
