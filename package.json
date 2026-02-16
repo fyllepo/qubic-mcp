@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-qubic",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "MCP server for the Qubic cryptocurrency — balances, transfers, prices, wallets, and network status.",
   "type": "module",
   "main": "./dist/index.js",
