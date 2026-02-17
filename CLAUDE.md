@@ -14,6 +14,7 @@ src/
   utils/validation.ts       — Input validation helpers
   utils/format.ts           — Number/QU/timestamp formatting
   utils/wallet-store.ts     — Local wallet storage (~/.qubic-mcp/wallets.json)
+  utils/network-store.ts    — Network profile storage (~/.qubic-mcp/networks.json)
 tests/                      — Vitest test files (mirrors src/ structure)
 tickets/                    — Kanban-style ticket tracking (backlog/, in-progress/, done/)
 ```

@@ -40,7 +40,7 @@ Read-only access to Qubic's on-chain smart contracts via binary SC query decodin
 Richer data and integrations as Qubic APIs expand.
 
 - [ ] Epoch details and computor performance
-- [ ] Multi-network support (mainnet/testnet toggle)
+- [x] Multi-network support (mainnet/testnet/custom network switching at runtime)
 - [ ] MCP Resources for Qubic reference documentation
 - [ ] MCP Prompts for common workflows
 - [ ] Transaction search and filtering

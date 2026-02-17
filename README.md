@@ -31,6 +31,7 @@ Query balances, inspect transactions, track wallets, monitor network status, and
 - **Mining Phase** — Current MINING/IDLE phase and XMR marathon status, calculated from tick data
 - **Token Registry** — List all registered Qubic tokens with issuer and website
 - **QX DEX Orderbook** — Live ask/bid orders for any token on the QX decentralized exchange
+- **Network Management** — Switch between mainnet, testnet, or your own local/lite node at runtime
 - **Secure by Design** — Never stores or transmits private keys or seeds
 
 ## Quick Start
@@ -121,6 +122,15 @@ Query the QX orderbook for any token (the assistant will look up the issuer auto
 - "Show bid orders for QMINE on QX"
 - "Show page 2 of the CFB orderbook"
 
+### Network Switching
+
+Add and switch between Qubic networks (mainnet, testnet, or your own local node):
+- "Add my local network at http://192.168.1.50:21841"
+- "Switch to my local network"
+- "Switch back to mainnet"
+- "List my networks"
+- "Remove my local network"
+
 ### Validation
 
 - "Is this a valid Qubic address? BAAAAA...ARMID"
@@ -145,12 +155,40 @@ npm run build
 
 ## Configuration
 
-Configuration is via environment variables. See [`.env.example`](.env.example) for all options.
+### Network Management
+
+The easiest way to configure which Qubic network you talk to is through the built-in tools — no env vars needed:
+
+1. **Add a custom network:** `add_network` — save your local node's IP with a friendly name
+2. **Switch networks:** `switch_network` — toggle between mainnet, testnet, or any saved network
+3. **List networks:** `list_networks` — see all available networks and which is active
+
+Networks are saved to `~/.qubic-mcp/networks.json` and persist across sessions. Built-in networks (mainnet, testnet) are always available.
+
+### Environment Variables
+
+For advanced use or CI environments, you can also configure via env vars. See [`.env.example`](.env.example).
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `QUBIC_RPC_URL` | `https://rpc.qubic.org` | Qubic RPC endpoint |
-| `QUBIC_API_URL` | `https://api.qubic.org` | Qubic Query API endpoint |
+| `QUBIC_RPC_URL` | *(from active network)* | Override the RPC endpoint (takes priority over saved networks) |
+| `QUBIC_API_URL` | *(from active network)* | Override the Query API endpoint |
+| `QUBIC_NETWORK_LABEL` | *(auto)* | Friendly label shown when using `QUBIC_RPC_URL` override |
+| `MCP_HTTP_PORT` | *(not set)* | Set a port to run as an HTTP server instead of stdio |
+
+### HTTP Transport
+
+By default the server uses stdio, which is what most MCP clients expect. To run it as a standalone HTTP endpoint instead, set `MCP_HTTP_PORT`:
+
+```bash
+MCP_HTTP_PORT=3000 node dist/index.js
+```
+
+The server exposes a single `/mcp` endpoint that supports the MCP Streamable HTTP transport:
+
+- **POST /mcp** — send JSON-RPC requests (initialize creates a session)
+- **GET /mcp** — open an SSE stream for server notifications (requires `mcp-session-id` header)
+- **DELETE /mcp** — terminate a session
 
 ## Available Tools
 
@@ -172,6 +210,10 @@ Configuration is via environment variables. See [`.env.example`](.env.example) f
 | `save_wallet` | Save a Qubic address with a friendly name for quick access |
 | `list_wallets` | List all saved wallets |
 | `remove_wallet` | Remove a saved wallet |
+| `add_network` | Save a custom Qubic network (e.g., local lite node) for quick switching |
+| `switch_network` | Switch the active network (mainnet, testnet, or any saved custom network) |
+| `list_networks` | List all available networks and show which is currently active |
+| `remove_network` | Remove a saved custom network |
 
 ## Security
 
