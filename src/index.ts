@@ -14,6 +14,8 @@ import { registerConvertQuUsdTool } from "./tools/convert-qu-usd.js";
 import { registerValidateAddressTool } from "./tools/validate-address.js";
 import { registerExplorerLinksTool } from "./tools/get-explorer-links.js";
 import { registerMiningPhaseTool } from "./tools/get-mining-phase.js";
+import { registerTokenListTool } from "./tools/get-token-list.js";
+import { registerQxOrderbookTool } from "./tools/get-qx-orderbook.js";
 import { getConfig } from "./config/index.js";
 import { createRequire } from "node:module";
 
@@ -43,6 +45,10 @@ registerRichListTool(server, config);
 registerConvertQuUsdTool(server, config);
 registerValidateAddressTool(server, config);
 registerExplorerLinksTool(server);
+
+// QX DEX & token registry
+registerTokenListTool(server);
+registerQxOrderbookTool(server, config);
 
 // Wallet management (local storage, public addresses only)
 registerWalletManagementTools(server);

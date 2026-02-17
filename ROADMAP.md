@@ -4,7 +4,7 @@
 
 Community input is welcome — suggest features, vote on priorities, or contribute directly.
 
-## Phase 1: Foundation (v0.1.x–v0.2.x) — Done
+## Phase 1: Foundation (v0.1.x–v0.2.x) — Complete
 
 Core read-only tools for querying the Qubic network.
 
@@ -25,12 +25,13 @@ Core read-only tools for querying the Qubic network.
 - [x] MCP Registry listing
 - [x] Automated release pipeline
 
-## Phase 2: Smart Contracts (when decoders are available)
+## Phase 2: Smart Contracts (v0.3.x) — In Progress
 
-Read-only access to Qubic's on-chain smart contracts. Currently blocked — SC queries return raw base64 blobs that require contract-specific decoders to interpret. We'll revisit this as the Qubic API evolves.
+Read-only access to Qubic's on-chain smart contracts via binary SC query decoding.
 
-- [ ] QX DEX orderbook and trade history
-- [ ] QX asset listings
+- [x] QX DEX orderbook (`get_qx_orderbook`)
+- [x] QX asset listings (`get_token_list` via static registry)
+- [ ] QX trade history
 - [ ] Quottery bet data
 - [ ] Smart contract state queries with human-readable output
 

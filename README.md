@@ -29,6 +29,8 @@ Query balances, inspect transactions, track wallets, monitor network status, and
 - **Address Validation** — Check format and on-chain activity
 - **Explorer Links** — Direct links to the official Qubic block explorer
 - **Mining Phase** — Current MINING/IDLE phase and XMR marathon status, calculated from tick data
+- **Token Registry** — List all registered Qubic tokens with issuer and website
+- **QX DEX Orderbook** — Live ask/bid orders for any token on the QX decentralized exchange
 - **Secure by Design** — Never stores or transmits private keys or seeds
 
 ## Quick Start
@@ -107,6 +109,18 @@ View transfer history:
 - "Get explorer links for my-main"
 - "Open the explorer for this transaction: abcdef...xyz"
 
+### QX DEX & Tokens
+
+List all tokens registered on Qubic:
+- "What tokens are available on Qubic?"
+- "Show me the token registry"
+
+Query the QX orderbook for any token (the assistant will look up the issuer automatically):
+- "Show the QX orderbook for CFB"
+- "What are the current ask orders for QXMR?"
+- "Show bid orders for QMINE on QX"
+- "Show page 2 of the CFB orderbook"
+
 ### Validation
 
 - "Is this a valid Qubic address? BAAAAA...ARMID"
@@ -153,6 +167,8 @@ Configuration is via environment variables. See [`.env.example`](.env.example) f
 | `validate_address` | Validate address format and check on-chain activity |
 | `get_explorer_links` | Get links to Qubic block explorers for an address or transaction |
 | `get_mining_phase` | Current MINING/IDLE phase, cycle progress, and XMR marathon status |
+| `get_token_list` | List all registered Qubic tokens with name, issuer address, and website |
+| `get_qx_orderbook` | QX DEX orderbook — ask and/or bid orders for any token, with pagination |
 | `save_wallet` | Save a Qubic address with a friendly name for quick access |
 | `list_wallets` | List all saved wallets |
 | `remove_wallet` | Remove a saved wallet |

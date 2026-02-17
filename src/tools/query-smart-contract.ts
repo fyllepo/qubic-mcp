@@ -40,12 +40,12 @@ This is a low-level query tool. Use inputType to specify which contract function
         .min(0)
         .default(0)
         .describe("Size of input data in bytes (default: 0)"),
-      requestedData: z
+      requestData: z
         .string()
         .default("")
-        .describe("Hex-encoded input data for the contract function (default: empty)"),
+        .describe("Base64-encoded input data for the contract function (default: empty)"),
     },
-    async ({ contractIndex, inputType, inputSize, requestedData }) => {
+    async ({ contractIndex, inputType, inputSize, requestData }) => {
       const contractName =
         KNOWN_CONTRACTS[contractIndex] ?? `Unknown Contract #${String(contractIndex)}`;
 
@@ -55,8 +55,8 @@ This is a low-level query tool. Use inputType to specify which contract function
           inputType,
           inputSize,
         };
-        if (requestedData.length > 0) {
-          body["requestedData"] = requestedData;
+        if (requestData.length > 0) {
+          body["requestData"] = requestData;
         }
 
         const response = await rpcPost(config, "/v1/querySmartContract", body);
