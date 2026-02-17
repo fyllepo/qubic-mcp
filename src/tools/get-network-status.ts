@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { QubicMcpConfig } from "../config/index.js";
 import { queryGet } from "../utils/qubic-rpc.js";
-import { formatNumber, formatQU, getField } from "../utils/format.js";
+import { formatNumber, formatQU, getField, progressBar } from "../utils/format.js";
 
 interface LatestStats {
   timestamp: string;
@@ -18,23 +18,24 @@ interface LatestStats {
 }
 
 function formatNetworkStatus(stats: LatestStats): string {
+  const qualityFraction = stats.epochTickQuality / 100;
   const lines = [
     `Qubic Network Status`,
-    `====================`,
+    `════════════════════`,
     ``,
     `Epoch: ${String(stats.epoch)}`,
     `Current Tick: ${formatNumber(stats.currentTick)}`,
     `Ticks in Epoch: ${formatNumber(stats.ticksInCurrentEpoch)}`,
     `Empty Ticks: ${formatNumber(stats.emptyTicksInCurrentEpoch)}`,
-    `Tick Quality: ${stats.epochTickQuality.toFixed(2)}%`,
+    `Tick Quality: ${progressBar(qualityFraction)}`,
     ``,
     `Supply & Economics:`,
     `  Circulating Supply: ${formatQU(stats.circulatingSupply)}`,
-    `  Burned: ${formatQU(stats.burnedQus)}`,
-    `  Active Addresses: ${formatNumber(stats.activeAddresses)}`,
+    `  Burned:             ${formatQU(stats.burnedQus)}`,
+    `  Active Addresses:   ${formatNumber(stats.activeAddresses)}`,
     ``,
     `Market:`,
-    `  Price: $${String(stats.price)}`,
+    `  Price:      $${String(stats.price)}`,
     `  Market Cap: $${formatNumber(stats.marketCap)}`,
   ];
   return lines.join("\n");

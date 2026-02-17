@@ -39,8 +39,9 @@ interface TransferResponse {
 
 function formatTransferHistory(address: string, data: TransferResponse): string {
   const lines = [
-    `Transfer History for ${address}`,
-    `${"=".repeat(40)}`,
+    `Transfer History`,
+    `════════════════`,
+    `Address: ${address}`,
     `Total Records: ${formatNumber(data.pagination.totalRecords)}`,
     `Page ${String(data.pagination.currentPage)} of ${String(data.pagination.totalPages)}`,
     ``,
@@ -56,18 +57,19 @@ function formatTransferHistory(address: string, data: TransferResponse): string 
       const tx = entry.transaction;
       const ts = Number(entry.timestamp);
       const date = ts > 0 ? new Date(ts).toISOString() : "N/A";
-      const direction = tx.sourceId === address ? "OUT" : "IN";
-      const counterparty = direction === "OUT" ? tx.destId : tx.sourceId;
-      const status = entry.moneyFlew ? "confirmed" : "no transfer";
+      const isOut = tx.sourceId === address;
+      const arrow = isOut ? "→ OUT" : "← IN ";
+      const counterparty = isOut ? tx.destId : tx.sourceId;
+      const status = entry.moneyFlew ? "✓ confirmed" : "✗ no transfer";
 
       lines.push(
-        `[${direction}] ${formatQU(tx.amount)} | Tick ${formatNumber(tx.tickNumber)} | ${date}`,
+        `${arrow}  ${formatQU(tx.amount)}  |  Tick ${formatNumber(tx.tickNumber)}  |  ${date}`,
       );
-      lines.push(`     ${direction === "OUT" ? "To" : "From"}: ${counterparty}`);
-      lines.push(`     TX: ${tx.txId} (${status})`);
+      lines.push(`      ${isOut ? "To" : "From"}: ${counterparty}`);
+      lines.push(`      TX: ${tx.txId}  (${status})`);
 
       if (tx.inputType > 0) {
-        lines.push(`     SC Call: inputType=${String(tx.inputType)}`);
+        lines.push(`      SC Call: inputType=${String(tx.inputType)}`);
       }
       lines.push(``);
     }

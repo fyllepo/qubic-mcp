@@ -1,17 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { externalGet } from "../utils/qubic-rpc.js";
-
-const TOKEN_LIST_URL = "https://static.qubic.org/v1/general/data/tokens.min.json";
-
-interface QubicToken {
-  name?: string;
-  issuer?: string;
-  website?: string;
-}
-
-interface TokenRegistryResponse {
-  tokens?: QubicToken[];
-}
+import { fetchTokenList } from "../utils/token-registry.js";
+import type { QubicToken } from "../utils/token-registry.js";
 
 function formatTokenList(tokens: QubicToken[]): string {
   if (tokens.length === 0) {
@@ -51,11 +40,7 @@ export function registerTokenListTool(server: McpServer): void {
     {},
     async () => {
       try {
-        const response = (await externalGet(TOKEN_LIST_URL)) as TokenRegistryResponse;
-
-        const tokens = Array.isArray(response)
-          ? (response as QubicToken[])
-          : (response.tokens ?? []);
+        const tokens = await fetchTokenList();
         return {
           content: [{ type: "text" as const, text: formatTokenList(tokens) }],
         };

@@ -73,7 +73,7 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
       if (qu !== undefined) {
         const usdValue = qu * price;
         lines.push(`QU → USD Conversion`);
-        lines.push(`===================`);
+        lines.push(`═══════════════════`);
         lines.push(
           `${formatLargeNumber(qu)} QU = $${usdValue < 0.01 ? usdValue.toPrecision(4) : usdValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
         );
@@ -83,7 +83,7 @@ export function registerConvertQuUsdTool(server: McpServer, config: QubicMcpConf
         const quValue = usd / price;
         if (lines.length > 0) lines.push(``);
         lines.push(`USD → QU Conversion`);
-        lines.push(`===================`);
+        lines.push(`═══════════════════`);
         lines.push(
           `$${usd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} = ${formatLargeNumber(quValue)} QU`,
         );

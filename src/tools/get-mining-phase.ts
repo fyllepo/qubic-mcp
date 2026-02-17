@@ -1,7 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { QubicMcpConfig } from "../config/index.js";
 import { rpcGet } from "../utils/qubic-rpc.js";
-import { formatNumber, getField } from "../utils/format.js";
+import { formatNumber, getField, progressBar } from "../utils/format.js";
 
 /**
  * Qubic network cycles: every 1,353 ticks the network alternates between
@@ -76,24 +76,25 @@ export function calculateDayType(nowMs: number = Date.now()): DayType {
 }
 
 function formatMiningPhase(info: MiningPhaseInfo): string {
-  const pct = (info.cycleProgress * 100).toFixed(1);
+  const phaseIcon = info.phase === "MINING" ? "⛏" : "⏸";
+  const dayIcon = info.isXmrMarathon ? "⛰" : "🧠";
   const lines = [
     `Qubic Mining Phase`,
-    `==================`,
+    `══════════════════`,
     ``,
-    `Phase: ${info.phase}`,
-    `Day Type: ${info.isXmrMarathon ? "XMR Marathon (Monero mining)" : "Qubic (AI solutions)"}`,
+    `${phaseIcon}  Phase: ${info.phase}`,
+    `${dayIcon}  Day Type: ${info.isXmrMarathon ? "XMR Marathon (Monero mining)" : "Qubic (AI solutions)"}`,
     ``,
     `Cycle #${formatNumber(info.cycleNumber)}:`,
-    `  Tick in cycle: ${formatNumber(info.tickInCycle)} / ${formatNumber(CYCLE_TICKS)}`,
-    `  Progress: ${pct}%`,
-    `  Ticks until ${info.nextPhase}: ${formatNumber(info.phaseTicksRemaining)}`,
+    `  ${formatNumber(info.tickInCycle)} / ${formatNumber(CYCLE_TICKS)} ticks`,
+    `  ${progressBar(info.cycleProgress)}`,
+    `  ⏭ ${formatNumber(info.phaseTicksRemaining)} ticks until ${info.nextPhase}`,
     ``,
     `Network:`,
     `  Current Tick: ${formatNumber(info.currentTick)}`,
     `  Epoch: ${String(info.epoch)}`,
     ``,
-    `Cycle structure: MINING (${String(MINING_PHASE_TICKS)} ticks) → IDLE (${String(IDLE_PHASE_TICKS)} ticks)`,
+    `Cycle: MINING (${String(MINING_PHASE_TICKS)} ticks) → IDLE (${String(IDLE_PHASE_TICKS)} ticks)`,
   ];
   return lines.join("\n");
 }

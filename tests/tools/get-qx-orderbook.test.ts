@@ -4,13 +4,9 @@ const mockFetch = vi.fn();
 vi.stubGlobal("fetch", mockFetch);
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-  registerQxOrderbookTool,
-  buildRequestData,
-  decodeOrders,
-  formatOrderbook,
-} from "../../src/tools/get-qx-orderbook.js";
-import type { QxOrder } from "../../src/tools/get-qx-orderbook.js";
+import { registerQxOrderbookTool } from "../../src/tools/get-qx-orderbook.js";
+import { buildRequestData, decodeOrders, formatOrderbook } from "../../src/utils/qx.js";
+import type { QxOrder } from "../../src/utils/qx.js";
 import type { QubicMcpConfig } from "../../src/config/index.js";
 
 const config: QubicMcpConfig = {
@@ -166,9 +162,9 @@ describe("formatOrderbook", () => {
 
     expect(output).toContain("QX Orderbook: CFB");
     expect(output).toContain("Ask Orders (sell):");
-    expect(output).toContain("1,500 shares @ 25 QU");
+    expect(output).toContain("1,500 @ 25 QU");
     expect(output).toContain("Bid Orders (buy):");
-    expect(output).toContain("2,000 shares @ 20 QU");
+    expect(output).toContain("2,000 @ 20 QU");
     expect(output).toContain("page 1");
   });
 

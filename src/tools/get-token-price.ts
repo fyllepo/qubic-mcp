@@ -46,16 +46,17 @@ function formatMarketCap(value: number | string): string {
 }
 
 function formatPriceComparison(sources: PriceSources): string {
-  const lines = [`QUBIC Price Comparison`, `======================`, ``];
+  const lines = [`QUBIC Price Comparison`, `══════════════════════`, ``];
 
   // Price comparison table
   lines.push(`Prices:`);
 
   if (sources.coinGecko) {
     const cg = sources.coinGecko;
-    const changeDir = cg.usd_24h_change >= 0 ? "+" : "";
+    const arrow = cg.usd_24h_change >= 0 ? "▲" : "▼";
+    const sign = cg.usd_24h_change >= 0 ? "+" : "";
     lines.push(
-      `  CoinGecko:      ${formatUsd(cg.usd)}  (${changeDir}${cg.usd_24h_change.toFixed(2)}% 24h)`,
+      `  CoinGecko:      ${formatUsd(cg.usd)}  ${arrow} ${sign}${cg.usd_24h_change.toFixed(2)}% 24h`,
     );
   }
 
