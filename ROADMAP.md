@@ -25,34 +25,45 @@ Core read-only tools for querying the Qubic network.
 - [x] MCP Registry listing
 - [x] Automated release pipeline
 
-## Phase 2: Smart Contracts (v0.3.x) — In Progress
+## Phase 2: Smart Contracts (v0.3.x–v0.4.x) — Complete
 
-Read-only access to Qubic's on-chain smart contracts via binary SC query decoding.
+Read-only access to Qubic's on-chain smart contracts and developer tooling.
 
 - [x] QX DEX orderbook (`get_qx_orderbook`)
 - [x] QX asset listings (`get_token_list` via static registry)
+- [x] Smart contract profile store — register custom SC interfaces with typed field schemas
+- [x] Binary codec — automatic encoding/decoding for SC query structs (uint8-64, int8-64, identity, padding, arrays, enums)
+- [x] Human-readable SC queries — `query_contract` with auto binary encode/decode
+- [x] Raw SC queries — `query_smart_contract` for low-level base64 access
+- [x] Multi-network switching — save and switch between mainnet, testnet, and custom endpoints at runtime
+- [x] HTTP transport — Streamable HTTP server mode for remote deployment
+- [x] `get_epoch_computors` — List all 676 computor identities for a given epoch
+- [x] MCP Resources — Qubic reference documentation
+- [x] MCP Prompts — Portfolio, market, and research workflows
+- [x] Shared utilities refactored — QX binary protocol and token registry extracted for reuse
 - [ ] QX trade history
 - [ ] Quottery bet data
-- [ ] Smart contract state queries with human-readable output
 
 ## Phase 3: Ecosystem & Analytics
 
 Richer data and integrations as Qubic APIs expand.
 
-- [ ] Epoch details and computor performance
-- [x] Multi-network support (mainnet/testnet/custom network switching at runtime)
-- [ ] MCP Resources for Qubic reference documentation
-- [ ] MCP Prompts for common workflows
+- [ ] Epoch details — burns, deductions, epoch summaries (partially done: computor list available)
+- [ ] Token balances per address (asset holdings)
+- [ ] Token transfer history (SC token transfers)
+- [ ] Token market data (volume, price history)
 - [ ] Transaction search and filtering
+- [ ] Transaction builder and broadcaster for SC invocation
 
 ## Phase 4: Advanced Features
 
 Longer-term possibilities depending on ecosystem maturity.
 
-- [ ] Streamable HTTP transport for remote deployment
 - [ ] Docker container distribution
-- [ ] Computor monitoring tools
+- [ ] Computor monitoring and performance tracking
 - [ ] Portfolio tracking across multiple addresses
+- [ ] Real-time WebSocket notifications
+- [ ] Self-hosted RPC documentation and guides
 
 ## Ideas We're Watching
 

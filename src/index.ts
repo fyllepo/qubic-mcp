@@ -24,6 +24,11 @@ import { registerNetworkManagementTools } from "./tools/network-management.js";
 import { registerQuerySmartContractTool } from "./tools/query-smart-contract.js";
 import { registerContractManagementTools } from "./tools/contract-management.js";
 import { registerQueryContractTool } from "./tools/query-contract.js";
+import { registerEpochComputorsTool } from "./tools/get-epoch-computors.js";
+import { registerDocsResources } from "./resources/docs.js";
+import { registerPortfolioPrompt } from "./prompts/portfolio.js";
+import { registerMarketPrompt } from "./prompts/market.js";
+import { registerResearchPrompt } from "./prompts/research.js";
 import { getConfig, type QubicMcpConfig } from "./config/index.js";
 import { createRequire } from "node:module";
 
@@ -70,6 +75,17 @@ function createServer(config: QubicMcpConfig): McpServer {
   registerQuerySmartContractTool(server, config);
   registerContractManagementTools(server);
   registerQueryContractTool(server, config);
+
+  // Epoch & computor data
+  registerEpochComputorsTool(server, config);
+
+  // MCP Resources — Qubic reference documentation
+  registerDocsResources(server);
+
+  // MCP Prompts — predefined workflows
+  registerPortfolioPrompt(server);
+  registerMarketPrompt(server);
+  registerResearchPrompt(server);
 
   return server;
 }
