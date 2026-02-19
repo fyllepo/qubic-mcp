@@ -309,7 +309,7 @@ The server exposes a single `/mcp` endpoint that supports the MCP Streamable HTT
 | `get_token_list` | List all registered Qubic tokens with name, issuer address, and website |
 | `get_qx_orderbook` | QX DEX orderbook — ask and/or bid orders for any token, with pagination |
 
-### Smart Contracts
+### Smart Contract Development & Testing
 
 | Tool | Description |
 |------|-------------|
@@ -319,13 +319,18 @@ The server exposes a single `/mcp` endpoint that supports the MCP Streamable HTT
 | `list_contracts` | List all registered contract definitions |
 | `remove_contract` | Remove a registered contract definition |
 
-### Wallets & Networks
+### Wallets
 
 | Tool | Description |
 |------|-------------|
 | `save_wallet` | Save a Qubic address with a friendly name for quick access |
 | `list_wallets` | List all saved wallets |
 | `remove_wallet` | Remove a saved wallet |
+
+### Network Management
+
+| Tool | Description |
+|------|-------------|
 | `add_network` | Save a custom Qubic network (e.g., local lite node) for quick switching |
 | `switch_network` | Switch the active network (mainnet, testnet, or any saved custom network) |
 | `list_networks` | List all available networks and show which is currently active |
