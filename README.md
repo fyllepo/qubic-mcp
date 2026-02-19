@@ -151,9 +151,9 @@ Then just ask in plain English:
 ### Smart Contract Queries
 
 ```
-"Register my QGate contract at index 24 with these functions: [...]"
-"Query QGate getGateCount"
-"Query QGate getGate with gateId 1"
+"Register my counter contract at index 10 with these functions: [...]"
+"Query counter getStats"
+"Query counter getValue with key 1"
 "List my registered contracts"
 ```
 
@@ -172,57 +172,44 @@ With qubic-mcp, you register your contract's interface once, and then query it b
 **1. Point the MCP at your test network:**
 
 ```
-"Add my test network at http://192.168.1.50:21841 called qgate-testnet"
-"Switch to qgate-testnet"
+"Add my test network at http://192.168.1.50:21841 called my-testnet"
+"Switch to my-testnet"
 ```
 
 Your MCP server now talks to your local lite node instead of mainnet. This persists across sessions in `~/.qubic-mcp/networks.json`.
 
 **2. Register your contract's interface:**
 
-Tell the assistant your contract's index and function definitions. For example, a QGate contract at index 24:
+Tell the assistant your contract's index and function definitions. Here's a simple counter contract at index 10 as an example:
 
 ```
-Register my QGate contract at index 24 with these functions:
+Register my counter contract at index 10 with these functions:
 
-- getGateCount (inputType 6): no input, output is totalGates (uint64) and activeGates (uint64)
-- getGate (inputType 5): input is gateId (uint64), output is mode (uint8), recipientCount (uint8), active (uint8), 5 bytes padding, owner (identity), totalReceived (uint64), totalForwarded (uint64), currentBalance (uint64), threshold (uint64), createdEpoch (uint64), recipients (identity array of 8), ratios (uint64 array of 8)
+- getStats (inputType 1): no input, output is totalKeys (uint32) and totalIncrements (uint64)
+- getValue (inputType 2): input is key (uint32), output is value (uint64) and lastUpdatedTick (uint32)
 ```
 
 The assistant will call `register_contract` with the proper field schema JSON. The definition is saved to `~/.qubic-mcp/contracts.json` and persists across sessions.
 
 **Supported field types:** `uint8`, `uint16`, `uint32`, `uint64`, `int8`, `int16`, `int32`, `int64`, `identity` (60-char Qubic address / 32-byte pubkey), `padding` (skipped bytes).
 
-Fields support `count` for arrays (e.g., 8 recipients) and `enum` for value-to-label mapping (e.g., `0 = "SPLIT"`, `1 = "ROUND_ROBIN"`).
+Fields support `count` for arrays and `enum` for value-to-label mapping.
 
 **3. Query your contract by name:**
 
 ```
-"Query QGate getGateCount"
-"Query QGate getGate with gateId 1"
+"Query counter getStats"
+"Query counter getValue with key 1"
 ```
 
 The MCP encodes your input into binary, calls the RPC endpoint, and decodes the response into named fields:
 
 ```
-qgate.getGate
-===============
+counter.getValue
+================
 
-  mode: SPLIT (0)
-  recipientCount: 2
-  active: 1
-  owner: BAAAAAAA...AAAAARMID
-  totalReceived: 5,000
-  totalForwarded: 3,000
-  currentBalance: 2,000
-  threshold: 10,000
-  createdEpoch: 200
-  recipients:
-    [0] XYZABC...DEF
-    [1] UVWXYZ...GHI
-  ratios:
-    [0] 60
-    [1] 40
+  value: 42
+  lastUpdatedTick: 22,345,678
 ```
 
 **4. Switch back to mainnet when done:**
