@@ -20,13 +20,15 @@ interface BalanceData {
 function formatBalance(label: string, data: BalanceData): string {
   const lines = [
     `${label}`,
+    `════════════════════`,
     `Balance: ${formatQU(data.balance)}`,
     ``,
     `Transfer Activity:`,
-    `  Incoming: ${formatQU(data.incomingAmount)} across ${formatNumber(data.numberOfIncomingTransfers)} transfers`,
-    `  Outgoing: ${formatQU(data.outgoingAmount)} across ${formatNumber(data.numberOfOutgoingTransfers)} transfers`,
-    `  Last incoming at tick: ${formatNumber(data.latestIncomingTransferTick)}`,
-    `  Last outgoing at tick: ${formatNumber(data.latestOutgoingTransferTick)}`,
+    `  ← In:  ${formatQU(data.incomingAmount)} (${formatNumber(data.numberOfIncomingTransfers)} transfers)`,
+    `  → Out: ${formatQU(data.outgoingAmount)} (${formatNumber(data.numberOfOutgoingTransfers)} transfers)`,
+    ``,
+    `  Last incoming tick: ${formatNumber(data.latestIncomingTransferTick)}`,
+    `  Last outgoing tick: ${formatNumber(data.latestOutgoingTransferTick)}`,
     ``,
     `Valid for tick: ${formatNumber(data.validForTick)}`,
   ];

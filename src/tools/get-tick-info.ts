@@ -13,12 +13,14 @@ interface TickInfo {
 function formatTickInfo(info: TickInfo): string {
   const ticksInEpoch = info.tick - info.initialTick;
   const lines = [
+    `Qubic Tick Info`,
+    `═══════════════`,
     `Current Tick: ${formatNumber(info.tick)}`,
     `Epoch: ${String(info.epoch)}`,
-    `Tick Duration: ~${String(info.duration)} seconds`,
+    `Tick Duration: ~${String(info.duration)}s`,
     ``,
     `Epoch Progress:`,
-    `  Initial tick: ${formatNumber(info.initialTick)}`,
+    `  Initial tick:   ${formatNumber(info.initialTick)}`,
     `  Ticks in epoch: ${formatNumber(ticksInEpoch)}`,
   ];
   return lines.join("\n");

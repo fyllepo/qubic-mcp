@@ -29,6 +29,25 @@ export function getField(obj: unknown, ...keys: string[]): unknown {
 }
 
 /**
+ * Render a visual progress bar: [████████░░░░░░░░░░░░] 57.4%
+ */
+export function progressBar(fraction: number, width: number = 20): string {
+  const clamped = Math.max(0, Math.min(1, fraction));
+  const filled = Math.round(clamped * width);
+  return `[${"█".repeat(filled)}${"░".repeat(width - filled)}] ${(clamped * 100).toFixed(1)}%`;
+}
+
+/**
+ * Render a horizontal bar scaled relative to a maximum value.
+ * Returns just the bar characters (no brackets), e.g. "████████░░░░"
+ */
+export function horizontalBar(value: bigint, max: bigint, width: number = 16): string {
+  if (max === 0n) return "░".repeat(width);
+  const filled = Number((value * BigInt(width)) / max);
+  return "█".repeat(filled) + "░".repeat(width - filled);
+}
+
+/**
  * Format a timestamp (milliseconds string or number) to ISO date string.
  */
 export function formatTimestamp(ts: string | number): string {

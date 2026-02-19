@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { QubicMcpConfig } from "../config/index.js";
 import { queryGet } from "../utils/qubic-rpc.js";
-import { formatQU, formatNumber } from "../utils/format.js";
+import { formatQU, formatNumber, horizontalBar } from "../utils/format.js";
 
 interface RichListEntity {
   identity: string;
@@ -26,17 +26,25 @@ function formatRichList(data: RichListResponse, page: number, pageSize: number):
   const startRank = (page - 1) * pageSize + 1;
   const lines = [
     `Qubic Rich List (Epoch ${String(data.epoch)})`,
-    `${"=".repeat(40)}`,
-    `Showing ranks ${String(startRank)}-${String(startRank + data.richList.entities.length - 1)} of ${formatNumber(data.pagination.totalRecords)}`,
+    `════════════════════════════════════════`,
+    `Showing ranks ${String(startRank)}–${String(startRank + data.richList.entities.length - 1)} of ${formatNumber(data.pagination.totalRecords)}`,
     `Page ${String(data.pagination.currentPage)} of ${String(data.pagination.totalPages)}`,
     ``,
   ];
+
+  // Find the max balance on this page to scale the bars
+  const maxBalance = data.richList.entities.reduce((max, e) => {
+    const b = BigInt(e.balance);
+    return b > max ? b : max;
+  }, 0n);
 
   for (let i = 0; i < data.richList.entities.length; i++) {
     const entity = data.richList.entities[i];
     if (!entity) continue;
     const rank = startRank + i;
-    lines.push(`#${String(rank).padStart(4)} | ${formatQU(entity.balance)}`);
+    const bal = BigInt(entity.balance);
+    const bar = horizontalBar(bal, maxBalance);
+    lines.push(`#${String(rank).padStart(4)}  ${bar}  ${formatQU(entity.balance)}`);
     lines.push(`       ${entity.identity}`);
     lines.push(``);
   }

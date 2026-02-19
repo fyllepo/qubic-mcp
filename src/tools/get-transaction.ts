@@ -26,16 +26,20 @@ function formatTx(entry: TransactionEntry): string {
   const tx = entry.transaction;
   const ts = Number(entry.timestamp);
   const date = ts > 0 ? new Date(ts).toISOString() : "N/A";
+  const statusIcon = entry.moneyFlew ? "✓" : "✗";
+  const statusText = entry.moneyFlew ? "Confirmed (money flew)" : "Included (no money transfer)";
 
   const lines = [
-    `Transaction: ${tx.txId}`,
-    `Status: ${entry.moneyFlew ? "Confirmed (money flew)" : "Included (no money transfer)"}`,
+    `Transaction`,
+    `═══════════`,
+    `ID: ${tx.txId}`,
+    `Status: ${statusIcon} ${statusText}`,
     `Timestamp: ${date}`,
     ``,
-    `From: ${tx.sourceId}`,
-    `To:   ${tx.destId}`,
+    `From:   ${tx.sourceId}`,
+    `  → To: ${tx.destId}`,
     `Amount: ${formatQU(tx.amount)}`,
-    `Tick: ${formatNumber(tx.tickNumber)}`,
+    `Tick:   ${formatNumber(tx.tickNumber)}`,
   ];
 
   if (tx.inputType > 0) {
