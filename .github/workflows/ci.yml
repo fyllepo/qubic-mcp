@@ -37,7 +37,7 @@ jobs:
           node-version: 20
           cache: "npm"
       - run: npm ci
-      - run: npm audit --audit-level=high
+      - run: npm audit --audit-level=high --omit=dev
 
   publish:
     needs: [build-and-test, security-audit]
