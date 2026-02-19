@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-qubic",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "MCP server for the Qubic cryptocurrency — balances, transfers, smart contracts, QX DEX, network switching, and developer tools for AI assistants.",
   "type": "module",
   "main": "./dist/index.js",
