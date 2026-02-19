@@ -21,6 +21,9 @@ import { registerMiningPhaseTool } from "./tools/get-mining-phase.js";
 import { registerTokenListTool } from "./tools/get-token-list.js";
 import { registerQxOrderbookTool } from "./tools/get-qx-orderbook.js";
 import { registerNetworkManagementTools } from "./tools/network-management.js";
+import { registerQuerySmartContractTool } from "./tools/query-smart-contract.js";
+import { registerContractManagementTools } from "./tools/contract-management.js";
+import { registerQueryContractTool } from "./tools/query-contract.js";
 import { getConfig, type QubicMcpConfig } from "./config/index.js";
 import { createRequire } from "node:module";
 
@@ -62,6 +65,11 @@ function createServer(config: QubicMcpConfig): McpServer {
 
   // Network management (add/switch/list custom networks)
   registerNetworkManagementTools(server, config);
+
+  // Smart contract tools
+  registerQuerySmartContractTool(server, config);
+  registerContractManagementTools(server);
+  registerQueryContractTool(server, config);
 
   return server;
 }
