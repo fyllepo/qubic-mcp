@@ -34,6 +34,54 @@ const DOCS: DocResource[] = [
     description: "Qubic identity system: seed → private key → public key → 60-char address",
     path: "/developers/qubic-id.md",
   },
+  {
+    name: "docs-oracles",
+    uri: "qubic://docs/oracles",
+    description: "Qubic Oracle Machines: bridging smart contracts with real-world data via QPI",
+    path: "/developers/oracles.md",
+  },
+  {
+    name: "docs-sc-architecture",
+    uri: "qubic://docs/sc-architecture",
+    description: "Qubic smart contract architecture: state, procedures, functions, logging",
+    path: "/developers/smart-contract-architecture.md",
+  },
+  {
+    name: "docs-sc-lifecycle",
+    uri: "qubic://docs/sc-lifecycle",
+    description: "Smart contract lifecycle: from research through proposal, IPO, deployment, and maintenance",
+    path: "/developers/smart-contracts/getting-started/lifecycle.md",
+  },
+  {
+    name: "docs-ticks-concurrency",
+    uri: "qubic://docs/ticks-concurrency",
+    description: "Qubic ticks and concurrency: tick lifecycle, parallel execution, transaction ordering",
+    path: "/developers/ticks-and-concurrency.md",
+  },
+  {
+    name: "docs-interact-sc",
+    uri: "qubic://docs/interact-sc",
+    description: "Interacting with Qubic smart contracts: calling functions, invoking procedures",
+    path: "/developers/interact-with-sc.md",
+  },
+  {
+    name: "docs-execution-fees",
+    uri: "qubic://docs/execution-fees",
+    description: "Qubic contract execution fees: fee reserves, invocation costs, burn mechanics",
+    path: "/learn/contract-execution-fees.md",
+  },
+  {
+    name: "docs-rpc",
+    uri: "qubic://docs/rpc",
+    description: "Qubic RPC API: endpoints, smart contract queries, transaction broadcasting",
+    path: "/api/rpc.md",
+  },
+  {
+    name: "docs-qpi",
+    uri: "qubic://docs/qpi",
+    description: "Qubic Protocol Interface (QPI): the API available to smart contracts",
+    path: "/developers/qpi.md",
+  },
 ];
 
 /** Strip YAML frontmatter (--- ... ---) from markdown content. */

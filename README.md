@@ -338,6 +338,14 @@ The server exposes a single `/mcp` endpoint that supports the MCP Streamable HTT
 | `qubic://docs/tokenomics` | Qubic tokenomics: supply cap, emission schedule, burning |
 | `qubic://docs/smart-contracts` | Qubic smart contracts: governance, execution, IPO process |
 | `qubic://docs/address-format` | Qubic identity system: seed to private key to public key to address |
+| `qubic://docs/oracles` | Qubic Oracle Machines: bridging smart contracts with real-world data via QPI |
+| `qubic://docs/sc-architecture` | Qubic smart contract architecture: state, procedures, functions, logging |
+| `qubic://docs/sc-lifecycle` | Smart contract lifecycle: from research through proposal, IPO, deployment, and maintenance |
+| `qubic://docs/ticks-concurrency` | Qubic ticks and concurrency: tick lifecycle, parallel execution, transaction ordering |
+| `qubic://docs/interact-sc` | Interacting with Qubic smart contracts: calling functions, invoking procedures |
+| `qubic://docs/execution-fees` | Qubic contract execution fees: fee reserves, invocation costs, burn mechanics |
+| `qubic://docs/rpc` | Qubic RPC API: endpoints, smart contract queries, transaction broadcasting |
+| `qubic://docs/qpi` | Qubic Protocol Interface (QPI): the API available to smart contracts |
 
 ### MCP Prompts
 

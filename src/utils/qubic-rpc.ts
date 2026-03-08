@@ -1,11 +1,32 @@
 import type { QubicMcpConfig } from "../config/index.js";
 
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  retries = 2,
+): Promise<Response> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      return response;
+    } catch (error) {
+      if (attempt === retries) {
+        throw new Error(
+          `RPC unreachable after ${String(retries + 1)} attempts — ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+  }
+  throw new Error("Unreachable");
+}
+
 /**
  * Makes a GET request to the Qubic RPC API.
  */
 export async function rpcGet(config: QubicMcpConfig, path: string): Promise<unknown> {
   const url = `${config.rpcUrl}${path}`;
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     signal: AbortSignal.timeout(15000),
@@ -30,7 +51,7 @@ export async function rpcPost(
   body: unknown,
 ): Promise<unknown> {
   const url = `${config.rpcUrl}${path}`;
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
