@@ -79,6 +79,11 @@ function createServer(config: QubicMcpConfig): McpServer {
   // Epoch & computor data
   registerEpochComputorsTool(server, config);
 
+  // Version tool
+  server.tool("get_version", "Get the current qubic-mcp server version", {}, async () => ({
+    content: [{ type: "text" as const, text: `qubic-mcp v${version}` }],
+  }));
+
   // MCP Resources — Qubic reference documentation
   registerDocsResources(server);
 
